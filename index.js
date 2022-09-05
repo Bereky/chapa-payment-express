@@ -1,5 +1,5 @@
 /* 
-    CHAPA PAYMENT INTEGRATION TEST
+    CHAPA API PAYMENT INTEGRATION TEST
     Required: Chapa secret key || GET THE KEY BY REGISTERING @ https://dashboard.chapa.co/register
 */
 
