@@ -1,5 +1,5 @@
 # Chapa Payment Integration
-This is the implementation of [Chapa API](https://developer.chapa.co/docs/overview) using [expressjs](https://github.com/expressjs/express)
+This is Unofficial implementation of payment with [Chapa API](https://developer.chapa.co/docs/overview) using [expressjs](https://github.com/expressjs/express)
 
 # Getting started
 To get the Node server running locally:
