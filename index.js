@@ -17,7 +17,7 @@ app.set("view engine", "ejs")
 // req header with chapa secret key
 const config = {
     headers: {
-        Authorization: CHAPA_AUTH
+        Authorization: `Bearer ${CHAPA_AUTH}`
     }
 }
 
