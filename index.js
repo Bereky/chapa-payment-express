@@ -30,7 +30,8 @@ app.get('/', (req, res) => {
 app.post("/api/pay", async (req, res) => {
 
          // chapa redirect you to this url when payment is successful
-        const CALLBACK_URL = "http://localhost:4400/api/success/"
+        const CALLBACK_URL = "http://localhost:4400/api/verify-payment/"
+        const RETURN_URL = "http://localhost:4400/api/payment-success/"
 
         // a unique reference given to every transaction
         const TEXT_REF = "tx-myecommerce12345-" + Date.now()
@@ -43,28 +44,31 @@ app.post("/api/pay", async (req, res) => {
             first_name: 'Ato',
             last_name: 'Ekele',
             tx_ref: TEXT_REF,
-            callback_url: CALLBACK_URL + TEXT_REF
+            callback_url: CALLBACK_URL + TEXT_REF,
+            return_url: RETURN_URL
         }
 
         // post request to chapa
         await axios.post(CHAPA_URL, data, config)
             .then((response) => {
                 res.redirect(response.data.data.checkout_url)
-                res.json(response.data)
             })
             .catch((err) => console.log(err))
 })
 
 // verification endpoint
-app.get("/api/success/:id", async (req, res) => {
+app.get("/api/verify-payment/:id", async (req, res) => {
     
         //verify the transaction 
         await axios.get("https://api.chapa.co/v1/transaction/verify/" + req.params.id, config)
             .then((response) => {
-                console.log(response)
-                res.render("success") //redirect to success page
+                console.log("Payment was successfully verified")
             }) 
             .catch((err) => console.log("Payment can't be verfied", err))
+})
+
+app.get("/api/payment-success", async (req, res) => {
+    res.render("success")
 })
 
 app.listen(PORT, () => console.log("Server listening on port:", PORT))
